@@ -1,8 +1,7 @@
-import { prisma, useAdminSystem, useFetchSystem, useImageSystem } from '@/systems'
+import { prisma, useAdminSystem, useFetchSystem, useImageSystem, useTaskSystem } from '@/systems'
 import { generateTokenAdmin } from './base'
 import { type AdminLogGetByCursorParamType, type AdminLogGetByCursorQueryType, type AdminProxyTestJsonType, type AdminUpdateInfoJsonType, type AdminUpdateProxyJsonType } from '@/schemas'
 import { AppError } from '@/classes'
-import { useTaskSystem } from '@/systems'
 import { useLogUtil } from '@/utils'
 import { logConfig, logTypeMap } from '@/configs'
 

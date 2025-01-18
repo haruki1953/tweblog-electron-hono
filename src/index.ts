@@ -6,6 +6,7 @@ import { appInfo, httpPort, systemAdminConfig } from './configs'
 import { apiRouter, staticRouter } from './routers'
 import { handleGlobalError, handleResData } from './helpers'
 import { startInitService } from './services'
+import { startElectron } from './desktop'
 
 const app = new Hono()
 
@@ -46,3 +47,5 @@ serve({
   fetch: app.fetch,
   port: httpPort
 })
+
+startElectron()
