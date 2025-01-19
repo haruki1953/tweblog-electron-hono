@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
-const electronAPI = {
+const desktopAPI = {
   node: () => process.versions.node,
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron,
@@ -8,4 +8,4 @@ const electronAPI = {
   httpPortIcp: async (): Promise<number> => await ipcRenderer.invoke('httpPortIcp')
 }
 
-contextBridge.exposeInMainWorld('electronAPI', electronAPI)
+contextBridge.exposeInMainWorld('desktopAPI', desktopAPI)

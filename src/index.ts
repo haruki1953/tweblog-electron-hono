@@ -43,9 +43,9 @@ console.log(`
   ========================================
   `)
 
-serve({
+const server = serve({
   fetch: app.fetch,
   port: httpPort
 })
 
-startElectron()
+startElectron(server)

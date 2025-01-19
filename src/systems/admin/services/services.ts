@@ -1,13 +1,17 @@
 import { AppError } from '@/classes'
 import { store, save } from '../init'
 import { canAttemptLogin, recordLoginFailure, resetLoginControl } from './login-control'
-import { systemAdminConfig } from '@/configs'
+import { adminUsernameKeyMap, systemAdminConfig } from '@/configs'
 import { generateRandomKey, useLogUtil } from '@/utils'
 import bcrypt from 'bcryptjs'
 
 const logUtil = useLogUtil()
 
 export const confirmAuth = (username: string, password: string) => {
+  // 针对桌面版的改造
+  if (store.username === adminUsernameKeyMap.disabled) {
+    throw new AppError('web管理未启用', 400)
+  }
   if (!canAttemptLogin()) {
     throw new AppError('多次登录失败，已锁定', 400, 1002)
   }

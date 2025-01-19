@@ -18,8 +18,13 @@ yarn prisma generate
 # 将Prisma schema推送到数据库，创建数据库
 yarn prisma db push
 
-# 启动开发服务器
-yarn dev
+# 编译
+yarn build
+
+# 启动
+yarn start
+
+# yarn build && yarn start
 ```
 
 ```

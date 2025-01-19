@@ -34,7 +34,7 @@
     "@types/node-fetch": "^2.6.12",
     "@types/uuid": "9.0.1",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
-    "electron": "^34.0.0",
+    "electron": "33.2.1",
     "eslint": "^8.0.1",
     "eslint-config-standard-with-typescript": "^43.0.1",
     "eslint-plugin-import": "^2.25.2",
