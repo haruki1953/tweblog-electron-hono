@@ -26,5 +26,5 @@ export const desktopConfig = {
 } as const
 
 // 是否打开开发工具
-export const enableDevTools = true
-// export const enableDevTools = false
+// export const enableDevTools = true
+export const enableDevTools = false

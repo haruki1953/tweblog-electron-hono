@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-import { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, screen } from 'electron'
+import { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, screen, shell } from 'electron'
 import { urlIndexHtml, pathPreloadJs, pathFaviconPng, desktopConfig, enableDevTools } from './config'
 import { generateTokenAdmin } from '@/services'
 import { httpPort } from '@/configs'
@@ -147,5 +147,11 @@ const createWindow = () => {
     event.preventDefault()
     mainWindow?.hide()
     return true
+  })
+
+  // 使用系统默认浏览器打开链接
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url).catch((error) => { console.log(error) })
+    return { action: 'deny' } // 阻止 Electron 自己打开链接
   })
 }

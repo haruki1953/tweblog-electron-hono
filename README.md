@@ -8,6 +8,21 @@
 - 桌面版后端 https://github.com/haruki1953/tweblog-electron-hono
 - 桌面版前端 https://github.com/haruki1953/tweblog-electron-vue3
 
+本仓库是从tweet-blog-hono修改而来的
+
+在开发环境中，web界面是由前端的开发服务器提供的，所以首先要运行前端tweblog-electron-vue3
+```
+  ➜  Local:   http://localhost:5173/desktop/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+
+之后应该修改 src\desktop\config.ts
+```
+export const urlIndexHtml = 'http://localhost:5173/desktop/'
+```
+
+
 ```sh
 # 安装项目依赖
 yarn install
