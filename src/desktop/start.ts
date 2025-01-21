@@ -1,6 +1,6 @@
 // Modules to control application life and create native browser window
 import { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, screen, shell } from 'electron'
-import { urlIndexHtml, pathPreloadJs, pathFaviconPng, desktopConfig, enableDevTools } from './config'
+import { urlIndexHtml, pathPreloadJs, pathIconIco, desktopConfig, enableDevTools, pathIconPng } from './config'
 import { generateTokenAdmin } from '@/services'
 import { httpPort } from '@/configs'
 import { type ServerType } from '@hono/node-server/.'
@@ -50,7 +50,8 @@ const handleIcpMain = () => {
 }
 
 const createTray = () => {
-  const icon = nativeImage.createFromPath(pathFaviconPng)
+  // 托盘用多尺寸ico会模糊，直接用图片吧
+  const icon = nativeImage.createFromPath(pathIconPng)
   mainTray = new Tray(icon)
   const contextMenu = Menu.buildFromTemplate([
     {
@@ -110,7 +111,8 @@ const createWindow = () => {
     minWidth: desktopConfig.minWidth,
     minHeight: desktopConfig.minHeight,
     show: false, // 初始隐藏窗口
-    icon: pathFaviconPng,
+    // 窗口图标使用多尺寸ico最好
+    icon: pathIconIco,
     webPreferences: {
       preload: pathPreloadJs
     }
@@ -118,14 +120,14 @@ const createWindow = () => {
   if (windowInfo.shouldMaximize) {
     mainWindow.maximize()
   }
-  // // 完成加载时显示窗口
-  // mainWindow.once('ready-to-show', () => {
-  //   mainWindow?.show()
-  // })
-  // 感觉延时1秒更好
-  setTimeout(() => {
-    mainWindow?.show()
-  }, 1000)
+  // 完成加载时显示窗口
+  mainWindow.once('ready-to-show', () => {
+    // mainWindow?.show()
+    // 感觉延时 0.5 秒更好
+    setTimeout(() => {
+      mainWindow?.show()
+    }, 500)
+  })
 
   // 移除默认的菜单栏
   mainWindow.setMenu(null)

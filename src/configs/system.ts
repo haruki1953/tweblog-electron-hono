@@ -1,11 +1,17 @@
 import type { AdminStore, FileStore, ForwardStore, ProfileStore, TaskStore } from '@/types'
 import { cloneDeep } from 'lodash'
 import path from 'path'
+import { app as appElectron } from 'electron'
 
-export const systemDataPath = path.join(__dirname, '../../data/')
+// // web版，保存在项目目录
+// export const systemDataPath = path.join(__dirname, '../../data/')
+// // 桌面版，保存在项目外部，像大多数软件一样将数据保存在文档
+// export const systemDataPath = path.join(appElectron.getPath('documents'), 'Tweblog/data/')
+// 桌面版开发时用临时的路径
+export const systemDataPath = path.join(appElectron.getPath('documents'), 'TweblogDev/data/')
 
 // 针对桌面版的改造，默认用户名密码为 admin-disabled
-// 并在登录服务中判断，如果用户名为 admin-disabled，则抛出 管理功能已关闭
+// 并在登录服务中判断，如果用户名为 admin-disabled，则抛出 管理功能已关闭 错误
 export const adminUsernameKeyMap = {
   disabled: 'admin-disabled'
 } as const
@@ -25,7 +31,7 @@ export const systemAdminConfig = {
   passwordSaltRounds: 10
 }
 
-export const systemPublicPath = path.join(__dirname, '../../data/public/')
+export const systemPublicPath = path.join(systemDataPath, 'public/')
 
 const imageSavePath = path.join(systemPublicPath, 'image/')
 const avatarSavePath = path.join(systemPublicPath, 'avatar/')
@@ -54,7 +60,7 @@ const storeDefaultProfile: ProfileStore = {
   name: '',
   bio: '',
   socialMedias: [],
-  aboutMarkdown: '# 关于【Tweblog】\n\n[Tweblog](https://tweblog.com) **是一个社交媒体博客化工具**，目的是为了方便同时运营多个社交媒体，也可以用它来充当自己的博客。\n\n**当前版本：** [0.0.2](https://tweblog.com/guide/changelog#002)\n\n**技术栈：**\n- 前端 TypeScript + Vue3 + ElementPlus\n- 后端 TypeScript + Node + Hono\n- 数据库 Sqlite + Prisma\n\n想开始尝试？跳到 [快速开始](https://tweblog.com/guide/getting-started)\n',
+  aboutMarkdown: '# 什么是 Tweblog\n\n**Tweblog 是一个社交媒体博客化工具**，目的是为了方便同时运营多个社交媒体，也可以用它来充当自己的博客。\n\n**官网/文档：** [tweblog.com](https://tweblog.com)\n',
   externalLinks: [],
   externalIcons: []
 }

@@ -5,13 +5,18 @@ import path from 'node:path'
 // 虽然本目录下是ts，但编译后是js，应该写.js
 export const pathPreloadJs = path.join(__dirname, './preload.js')
 
-// electron专用前端所在位置，开发时用的是vite提供的
-// export const urlIndexHtml = `http://127.0.0.1:${httpPort}/desktop/`
-export const urlIndexHtml = 'http://localhost:5173/desktop/'
+// electron专用前端所在位置，生产环境下是由后端托管的
+export const urlIndexHtml = `http://127.0.0.1:${httpPort}/desktop/`
+// // 开发时用的是vite提供的
+// export const urlIndexHtml = 'http://localhost:5173/desktop/'
 
-// 托盘图标不支持svg，用png
-export const pathFaviconSvg = path.join(__dirname, '../../assets/favicon.svg')
-export const pathFaviconPng = path.join(__dirname, '../../assets/favicon.png')
+// 托盘图标不支持svg，可以用png
+// export const pathFaviconSvg = path.join(__dirname, '../../assets/favicon.svg')
+// export const pathFaviconPng = path.join(__dirname, '../../assets/favicon.png')
+// 窗口图标使用多尺寸ico最好
+export const pathIconIco = path.join(__dirname, '../../assets/icon.ico')
+// 托盘用多尺寸ico会模糊，直接用图片吧
+export const pathIconPng = path.join(__dirname, '../../assets/icon.png')
 
 export const desktopConfig = {
   width: 1280,
