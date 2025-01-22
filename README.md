@@ -18,8 +18,8 @@
 ```
 
 之后应该修改 `src\desktop\config.ts`
-```
-export const urlIndexHtml = 'http://localhost:5173/desktop/'
+```ts
+export const getUrlIndexHtml = () => 'http://localhost:5173/desktop/'
 ```
 
 ```sh

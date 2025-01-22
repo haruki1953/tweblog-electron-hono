@@ -6,9 +6,10 @@ import path from 'node:path'
 export const pathPreloadJs = path.join(__dirname, './preload.js')
 
 // electron专用前端所在位置，生产环境下是由后端托管的
-export const urlIndexHtml = `http://127.0.0.1:${httpPort}/desktop/`
+// 端口重复会刷新端口，所以注意不能再次直接拼接，需要是一个函数，在使用时拼接
+export const getUrlIndexHtml = () => `http://127.0.0.1:${httpPort}/desktop/`
 // // 开发时用的是vite提供的
-// export const urlIndexHtml = 'http://localhost:5173/desktop/'
+// export const getUrlIndexHtml = () => 'http://localhost:5173/desktop/'
 
 // 托盘图标不支持svg，可以用png
 // export const pathFaviconSvg = path.join(__dirname, '../../assets/favicon.svg')

@@ -1,6 +1,6 @@
 // Modules to control application life and create native browser window
 import { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, screen, shell } from 'electron'
-import { urlIndexHtml, pathPreloadJs, pathIconIco, desktopConfig, enableDevTools, pathIconPng } from './config'
+import { getUrlIndexHtml, pathPreloadJs, pathIconIco, desktopConfig, enableDevTools, pathIconPng } from './config'
 import { generateTokenAdmin } from '@/services'
 import { httpPort } from '@/configs'
 import { type ServerType } from '@hono/node-server/.'
@@ -18,8 +18,21 @@ const quitApp = () => {
   app.quit()
 }
 
+// 确保只有一个实例在运行，将在 index.ts 调用
+export const checkOnlyOneDesktop = () => {
+  if (!app.requestSingleInstanceLock()) {
+    // 已有app在运行，退出
+    quitApp()
+    return false
+  } else {
+    // app为首个运行，为其绑定时间，当发现被重复运行时，实现窗口重新聚焦到本窗口
+    app.on('second-instance', mainWindowShowRestoreFocus)
+    return true
+  }
+}
+
 // 将在 src/index.ts 中调用
-export const startElectron = (server: ServerType) => {
+export const startElectronDesktop = (server: ServerType) => {
   app.whenReady().then(() => {
     // 绑定icp通信
     handleIcpMain()
@@ -65,26 +78,29 @@ const createTray = () => {
   mainTray.setTitle(desktopConfig.trayTitle)
 
   // 点击托盘图标显示窗口
-  mainTray.on('click', () => {
-    if (isQuitting) {
-      return
-    }
-    if (mainWindow == null) {
-      return
-    }
-    const isVisible = mainWindow.isVisible()
-    const isMinimized = mainWindow.isMinimized()
+  mainTray.on('click', mainWindowShowRestoreFocus)
+}
 
-    if (!isVisible && !isMinimized) {
-      // 已隐藏
-      mainWindow.show()
-    } else if (isMinimized) {
-      // 最小化
-      mainWindow.restore()
-    } else {
-      // 显示
-    }
-  })
+const mainWindowShowRestoreFocus = () => {
+  if (isQuitting) {
+    return
+  }
+  if (mainWindow == null) {
+    return
+  }
+  const isVisible = mainWindow.isVisible()
+  const isMinimized = mainWindow.isMinimized()
+
+  if (!isVisible && !isMinimized) {
+    // 已隐藏，显示
+    mainWindow.show()
+  } else if (isMinimized) {
+    // 最小化，恢复
+    mainWindow.restore()
+  } else {
+    // 显示
+  }
+  mainWindow.focus()
 }
 
 const createWindow = () => {
@@ -133,7 +149,7 @@ const createWindow = () => {
   mainWindow.setMenu(null)
 
   // 加载 index.html
-  mainWindow.loadURL(urlIndexHtml).catch((error) => { console.log(error) })
+  mainWindow.loadURL(getUrlIndexHtml()).catch((error) => { console.log(error) })
 
   // 打开开发工具
   if (enableDevTools) {
