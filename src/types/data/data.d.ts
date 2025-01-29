@@ -1,7 +1,8 @@
 import { type LogTypeEnumValues } from '@/configs'
-import type { Post as PostPrisma, Image as ImagePrisma, Log as LogPrisma } from '@prisma/client'
+import type { drizzleSchema } from '@/db'
 
-export type { PostPrisma, ImagePrisma }
+export type PostInferSelect = typeof drizzleSchema.posts.$inferSelect
+export type ImageInferSelect = typeof drizzleSchema.images.$inferSelect
 
 export interface ResData {
   code: number
@@ -10,14 +11,14 @@ export interface ResData {
   token?: string
 }
 
-export interface Post extends PostPrisma {
+export interface Post extends PostInferSelect {
   images: Image[]
   _count: {
     replies: number
   }
 }
 
-export interface Image extends ImagePrisma {}
+export interface Image extends ImageInferSelect {}
 
 export type PostGetByIdData = Post & {
   parentPost: Post | null

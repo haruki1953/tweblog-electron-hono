@@ -11,7 +11,8 @@ staticConfig.files.forEach((file) => {
     getContent: async (path, c) => {
       try {
         const content = await fsp.readFile(path)
-        // 奇怪，明明用pnpm的时候没有类型错误，先any了
+        // 有类型问题，但是运行时没问题，先as了
+        // getContent 需要返回的是 Data | Response | null
         return content as any
       } catch (error) {
         return null
