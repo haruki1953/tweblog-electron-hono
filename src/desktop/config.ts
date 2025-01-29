@@ -28,7 +28,9 @@ export const desktopConfig = {
   minWidth: 500,
   minHeight: 400,
   trayTitle: 'Tweblog',
-  trayToolTip: 'Tweblog'
+  trayToolTip: 'Tweblog',
+  trayShowLable: '打开 Tweblog',
+  trayQuitLable: '退出 Tweblog'
 } as const
 
 // 是否打开开发工具

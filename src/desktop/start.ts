@@ -68,7 +68,10 @@ const createTray = () => {
   mainTray = new Tray(icon)
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: '退出',
+      label: desktopConfig.trayShowLable,
+      click: mainWindowShowRestoreFocus
+    }, {
+      label: desktopConfig.trayQuitLable,
       click: quitApp
     }
   ])
