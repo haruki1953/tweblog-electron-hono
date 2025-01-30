@@ -6,7 +6,6 @@
   "author": "haruki",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
     "lint": "eslint --ext .ts src",
     "build": "tsc && tsc-alias",
     "start": "electron-forge start",

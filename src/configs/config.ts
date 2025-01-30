@@ -4,7 +4,7 @@ import portfinder from 'portfinder'
 let httpPort = Number(process.env.TWEET_BLOG_HONO_PORT)
 // default port
 if (Number.isNaN(httpPort)) {
-  httpPort = 3000
+  httpPort = 51125
 }
 export { httpPort }
 

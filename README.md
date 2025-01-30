@@ -10,6 +10,8 @@
 
 本仓库是从tweet-blog-hono修改而来的
 
+## 开发环境
+
 在开发环境中，web界面是由前端的开发服务器提供的，所以首先要运行前端 tweblog-electron-vue3
 ```
   ➜  Local:   http://localhost:5173/desktop/
@@ -17,7 +19,7 @@
   ➜  press h + enter to show help
 ```
 
-之后应该修改 `src\desktop\config.ts`
+之后应该修改 `src\desktop\config.ts`，来指定electron所使用的前端的url
 ```ts
 export const getUrlIndexHtml = () => 'http://localhost:5173/desktop/'
 ```
@@ -38,7 +40,8 @@ yarn build
 # 启动
 yarn start
 
-# 代码修改后都需要编译再启动，而且如果有 新增/删除 文件，最好在编译前手动删除dist，因为下面的命令并不会首先清空dist，而只是将编译后的文件覆盖原文件
+# 代码修改后都需要编译再启动，而且如果有 新增/删除 文件，最好在编译前手动删除dist
+# 因为下面的命令并不会首先清空dist，而只是将编译后的文件覆盖原文件
 yarn build && yarn start
 
 # package.json
@@ -46,7 +49,7 @@ yarn build && yarn start
 ```
 
 ```
-open http://localhost:3000
+open http://localhost:51125
 ```
 
 在生产环境运行时，一共有三个前端要被本后端托管，存放在 static 文件夹下
