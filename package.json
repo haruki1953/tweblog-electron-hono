@@ -1,6 +1,6 @@
 {
   "name": "tweblog-electron-hono",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Hello World!",
   "main": "dist/index.js",
   "author": "haruki",
