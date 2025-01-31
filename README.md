@@ -35,9 +35,8 @@ yarn build
 # 启动
 yarn start
 
-# 代码修改后都需要编译再启动，而且如果有 新增/删除 文件，最好在编译前手动删除dist
-# 因为下面的命令并不会首先清空dist，而只是将编译后的文件覆盖原文件
-yarn build && yarn start
+# 代码修改后都需要编译再启动，最好在编译前删除dist
+rm -rf dist && yarn build && yarn start
 
 # package.json
 # "main": "dist/index.js",
