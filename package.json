@@ -1,7 +1,7 @@
 {
-  "name": "tweblog-electron-hono",
+  "name": "tweblog",
   "version": "1.0.0",
-  "description": "Hello World!",
+  "description": "一个社交媒体博客化工具",
   "main": "dist/index.js",
   "author": "haruki",
   "license": "MIT",
