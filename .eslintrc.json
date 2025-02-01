@@ -19,5 +19,5 @@
     "rules": {
         "@typescript-eslint/explicit-function-return-type": "off"
     },
-    "ignorePatterns": ["drizzle.config.ts"]
+    "ignorePatterns": ["drizzle.config.ts", "forge.config.js"]
 }

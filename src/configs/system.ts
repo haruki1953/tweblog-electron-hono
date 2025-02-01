@@ -5,10 +5,13 @@ import { app as appElectron } from 'electron'
 
 // // web版，保存在项目目录
 // export const systemDataPath = path.join(__dirname, '../../data/')
-// // 桌面版，保存在项目外部，像大多数软件一样将数据保存在文档
-// export const systemDataPath = path.join(appElectron.getPath('documents'), 'Tweblog/data/')
-// 桌面版开发时用临时的路径
-export const systemDataPath = path.join(appElectron.getPath('documents'), 'TweblogDev/data/')
+
+// 桌面版，保存在项目外部，像大多数软件一样将数据保存在文档
+export const systemDataPath = path.join(appElectron.getPath('documents'), 'Tweblog/data/')
+// console.log(systemDataPath)
+
+// // 桌面版开发时用临时的路径
+// export const systemDataPath = path.join(appElectron.getPath('documents'), 'TweblogDev/data/')
 
 // 针对桌面版的改造，默认用户名密码为 admin-disabled
 // 并在登录服务中判断，如果用户名为 admin-disabled，则抛出 管理功能已关闭 错误
